@@ -15,14 +15,14 @@ attr_accessor :word, :guesses, :wrong_guesses, :word_with_guesses, :check_win_or
   def guess(letter)
   	if not letter =~ /[[:alpha:]]/
   		raise ArgumentError, "Invalid input. Input needs to be a letter." 
-  	elsif self.guesses.include? letter or self.wrong_guesses.include? letter
+  	elsif self.guesses.include? letter.downcase or self.wrong_guesses.include? letter.downcase
   		false
   	elsif self.word.include? letter
-  		self.guesses += letter
+  		self.guesses += letter.downcase
   		update_word_with_guesses(letter)
   		true
 	else
-		self.wrong_guesses += letter
+		self.wrong_guesses += letter.downcase
 		true
 	end
   end
@@ -30,7 +30,7 @@ attr_accessor :word, :guesses, :wrong_guesses, :word_with_guesses, :check_win_or
   def update_word_with_guesses(letter)
   	for i in 0...self.word.length
   		if self.word[i] == letter
-  			self.word_with_guesses[i] = letter
+  			self.word_with_guesses[i] = letter.downcase
   		end
   	end
   end
